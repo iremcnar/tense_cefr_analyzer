@@ -24,10 +24,3 @@ Bu proje, kullanıcıların İngilizce cümleleri girerek CEFR (Common European 
 - **Pickle**: Tokenizer dosyasını yüklemek için.
 - **HTML & CSS**: Web sayfası tasarımı için.
 
-
-
-- Python 3.x yüklü olmalıdır.
-- Aşağıdaki komutla gerekli kütüphaneleri yükleyebilirsiniz:
-
-```bash
-pip install -r requirements.txt
