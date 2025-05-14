@@ -7,6 +7,7 @@ Daha sonra Keras ile LSTM (Long Short-Term Memory) tabanlı bir derin öğrenme 
 Modelin eğitiminde TensorFlow, Keras, scikit-learn, numpy ve pandas gibi popüler Python kütüphanelerini kullandım.
 Modelleri eğitim sonrası kaydederek daha sonra PyWebIO ile interaktif bir web uygulaması oluşturup kullanıcıların tahminleri canlı olarak test etmesini sağladım.
 
+
 ------MODEL----------
 CEFR modelini makine öğrenmesi tabanlı olarak sıfırdan eğittim. Modeli ve yardımcı objeleri (TF-IDF, label encoder) pickle (.pkl) formatında kaydettim.
 Tense modelini ise LSTM tabanlı derin öğrenme yöntemiyle sıfırdan eğittim ve tüm modeli .h5 formatında kaydettim.
