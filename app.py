@@ -36,8 +36,8 @@ def predict_cefr(sentence, model, tfidf, le):
     return le.inverse_transform(prediction)[0], {level: prob for level, prob in zip(le.classes_, proba)}
 
 # --- TENSE MODEL YÜKLE ---
-model_tense = tf.keras.models.load_model("tense_model/tense_classifier.h5") #DİKKAT :sitenin çalışması için kendı model yolunuza göre değiştirmelisiniz
-with open("tense_model/tokenizer.pickle", "rb") as handle: #DİKKAT :sitenin çalışması için kendı model yolunuza göre değiştirmelisiniz
+model_tense = tf.keras.models.load_model("Tense_model/tense_classifier.h5") #DİKKAT :sitenin çalışması için kendı model yolunuza göre değiştirmelisiniz
+with open("Tense_model/tokenizer.pickle", "rb") as handle: #DİKKAT :sitenin çalışması için kendı model yolunuza göre değiştirmelisiniz
     tokenizer = pickle.load(handle)
 max_length = 50
 
