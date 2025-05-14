@@ -18,9 +18,9 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 # --- CEFR MODEL YÜKLE ---
 def load_cefr_model():
-    model = joblib.load('CEFR_model/my_cefr_model.pkl') #DİKKAT :sitenin çalışması için kendı model yolunuza göre değiştirmelisiniz
-    tfidf = joblib.load('CEFR_model/my_tfidf_vectorizer.pkl') #DİKKAT :sitenin çalışması için kendı model yolunuza göre değiştirmelisiniz
-    le = joblib.load('CEFR_model/my_label_encoder.pkl') #DİKKAT :sitenin çalışması için kendı model yolunuza göre değiştirmelisiniz
+    model = joblib.load('CEFR_model/my_cefr_model.pkl') 
+    tfidf = joblib.load('CEFR_model/my_tfidf_vectorizer.pkl') 
+    le = joblib.load('CEFR_model/my_label_encoder.pkl') 
     return model, tfidf, le
 
 # CEFR ön işleme
@@ -36,8 +36,8 @@ def predict_cefr(sentence, model, tfidf, le):
     return le.inverse_transform(prediction)[0], {level: prob for level, prob in zip(le.classes_, proba)}
 
 # --- TENSE MODEL YÜKLE ---
-model_tense = tf.keras.models.load_model("tense_model/tense_classifier.h5") #DİKKAT :sitenin çalışması için kendı model yolunuza göre değiştirmelisiniz
-with open("tense_model/tokenizer.pickle", "rb") as handle: #DİKKAT :sitenin çalışması için kendı model yolunuza göre değiştirmelisiniz
+model_tense = tf.keras.models.load_model("tense_model/tense_classifier.h5") 
+with open("tense_model/tokenizer.pickle", "rb") as handle: 
     tokenizer = pickle.load(handle)
 max_length = 50
 
