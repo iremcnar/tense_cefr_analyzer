@@ -1,3 +1,10 @@
+# Uygulamayı çalıştırmak için terminalde aşağıdaki komutu kullanın:
+# python app.py
+# Uygulama çalıştıktan sonra tarayıcınızda aşağıdaki bağlantıyı açabilirsiniz:
+# http://192.168.2.212:8086/
+# Not: PyWebIO ile çalıştığı için tarayıcıda "güvenli değil" uyarısı görünebilir devam et butonuna tıklayarak uygulamayı açabilirsiniz.
+# (Not: Bu bağlantı terminalde çalıştırıldığında bir kez gösterildiği için buraya not olarak ekledim.)
+# Siteye girmek istemezseniz sitenin bazı görüntülerini yandaki images kısmında bulabilirsiniz.
 from pywebio.input import input, select
 from pywebio.output import put_text, put_markdown, put_error, put_html, put_scope, use_scope, clear
 from pywebio import start_server
@@ -7,14 +14,13 @@ import pickle
 import numpy as np
 import re
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+import base64
 
-# Uygulamayı çalıştırmak için terminalde aşağıdaki komutu kullanın:
-# python app.py
-# Uygulama çalıştıktan sonra tarayıcınızda aşağıdaki bağlantıyı açabilirsiniz:
-# http://192.168.2.212:8086/
-# Not: PyWebIO ile çalıştığı için tarayıcıda "güvenli değil" uyarısı görünebilir devam et butonuna tıklayarak uygulamayı açabilirsiniz.
-# (Not: Bu bağlantı terminalde çalıştırıldığında bir kez gösterildiği için buraya not olarak ekledim.)
-# Siteye girmek istemezseniz sitenin bazı görüntülerini yandaki images kısmında bulabilirsiniz.
+def get_background_image_base64(path='Ingiltere.jpg'):
+    with open(path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode('utf-8')
+
+b64_string = get_background_image_base64()
 
 # --- CEFR MODEL YÜKLE ---
 def load_cefr_model():
@@ -23,11 +29,9 @@ def load_cefr_model():
     le = joblib.load('CEFR_model/my_label_encoder.pkl') 
     return model, tfidf, le
 
-# CEFR ön işleme
 def preprocess_cefr(text):
     return text.lower().strip()
 
-# CEFR tahmin
 def predict_cefr(sentence, model, tfidf, le):
     processed = preprocess_cefr(sentence)
     vector = tfidf.transform([processed])
@@ -41,14 +45,12 @@ with open("tense_model/tokenizer.pickle", "rb") as handle:
     tokenizer = pickle.load(handle)
 max_length = 50
 
-# Tense ön işleme
 def preprocess_tense(text):
     text = text.lower()
     text = re.sub(r'[^\w\s]', '', text)
     text = re.sub(r'\d+', '', text)
     return text.strip()
 
-# Tense tahmin
 def predict_tense(sentence):
     processed = preprocess_tense(sentence)
     seq = tokenizer.texts_to_sequences([processed])
@@ -59,30 +61,74 @@ def predict_tense(sentence):
 
 # --- CSS & HTML ---
 def render_css():
-    put_html("""
+    put_html(f"""
     <style>
-        body {
-            background: linear-gradient(to right, #FFDEE9, #B5FFFC);
-            font-family: 'Segoe UI', sans-serif;
-            padding: 20px;
-            color: #333;
-        }
-        .result-box {
-            background-color: rgba(255,255,255,0.9);
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .result-box h3 {
-            color: #FF6347;
-        }
-        .result-box p {
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {{
+            background: linear-gradient(rgba(80, 40, 100, 0.6), rgba(80, 40, 100, 0.6)), 
+                        url("data:image/jpeg;base64,{b64_string}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            padding: 30px;
+            color: #2c3e50;
+        }}
+
+        h1, h2, h3 {{
+            font-weight: 600;
+        }}
+
+        .result-box {{
+            background-color: #b1c4d3;  /* Pastel Mavi-Mor Tonu */
+            border-left: 6px solid #9b59b6;
+            border-radius: 10px;
+            padding: 25px 30px;
+            margin-top: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }}
+
+        .result-box:hover {{
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }}
+
+        .result-box h3 {{
+            color: #6c3483;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }}
+
+        .result-box p {{
             font-size: 16px;
-        }
+            line-height: 1.6;
+            color: #555;
+            margin: 5px 0;
+        }}
+
+        .highlight {{
+            font-weight: bold;
+            color: #8e44ad;
+        }}
+
+        .proba-bar {{
+            background-color: #f3e5f5;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }}
+
+        .proba-fill {{
+            height: 16px;
+            background-color: #9b59b6;
+            text-align: right;
+            padding-right: 5px;
+            color: white;
+            font-size: 12px;
+            line-height: 16px;
+        }}
     </style>
     """)
-
+    
 # --- ANA UYGULAMA ---
 def main():
     render_css()
@@ -92,7 +138,11 @@ def main():
         put_error(f"CEFR model dosyaları yüklenemedi: {str(e)}")
         return
 
-    put_markdown("## 🧠 İngilizce Cümle Analiz Sistemi")
+    put_html("""
+        <h2 style='text-align:center; color:#2c3e50;'>
+            🧠 <span style="color:#3498db;">İngilizce Cümle Analiz Sistemi</span>
+        </h2>
+    """)
     put_scope("results")
 
     while True:
@@ -111,9 +161,9 @@ def main():
                             <h3>✏️ Girilen Cümle:</h3>
                             <p>{sentence}</p>
                             <h3>🎯 CEFR Seviyesi:</h3>
-                            <p><strong>{level}</strong></p>
+                            <p class='highlight'>{level}</p>
                             <h3>📊 Olasılıklar:</h3>
-                            {"".join(f"<p>{lvl}: %{prob*100:.2f}</p>" for lvl, prob in sorted(probabilities.items(), key=lambda x: x[1], reverse=True))}
+                            {"".join(f"<p>{lvl}</p><div class='proba-bar'><div class='proba-fill' style='width:{prob*100:.2f}%;'>{prob*100:.1f}%</div></div>" for lvl, prob in sorted(probabilities.items(), key=lambda x: x[1], reverse=True))}
                         </div>
                     """)
             except Exception as e:
@@ -129,16 +179,14 @@ def main():
                             <h3>✏️ Girilen Cümle:</h3>
                             <p>{sentence}</p>
                             <h3>🎯 Zaman Tahmini:</h3>
-                            <p><strong>{tense_map[tense_index]}</strong></p>
+                            <p class='highlight'>{tense_map[tense_index]}</p>
                             <h3>📊 Güven Düzeyleri:</h3>
-                            <p>Present: %{confidence[0]*100:.1f}</p>
-                            <p>Past: %{confidence[1]*100:.1f}</p>
-                            <p>Future: %{confidence[2]*100:.1f}</p>
+                            {"".join(f"<p>{label}</p><div class='proba-bar'><div class='proba-fill' style='width:{confidence[i]*100:.1f}%;'>{confidence[i]*100:.1f}%</div></div>" for i, label in enumerate(["Present", "Past", "Future"]))}
                         </div>
                     """)
             except Exception as e:
                 put_error(f"Hata oluştu: {str(e)}")
 
-# Başlat
+# --- SUNUCU BAŞLAT ---
 if __name__ == '__main__':
     start_server(main, port=8086, debug=True)
