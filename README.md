@@ -1,44 +1,37 @@
-# English Sentence Analyzer
+# İngilizce Cümle Analiz Sistemi 📚🧠
 
-![Project Banner](https://via.placeholder.com/800x200.png?text=English+Sentence+Analyzer)
+Bu proje, kullanıcıların İngilizce cümleleri girerek CEFR (Common European Framework of Reference) seviyesi ve zaman dilimi (tense) tahminleri yapabilmesini sağlar. PyWebIO ile geliştirilmiş olan bu uygulama, Python tabanlıdır ve web üzerinden çalışmaktadır. Kullanıcıların girdikleri cümleye göre İngilizce seviyeleri ve zaman dilimleri tahmin edilmektedir.
 
-A comprehensive tool for analyzing English sentences, featuring:
-- **CEFR Level Classification** (A1-C2)
-- **Tense Classification** (Present/Past/Future)
-- Multiple interface options (GUI, Web, CLI)
+---
 
-## Table of Contents
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Models](#models)
-- [Data](#data)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
+## Özellikler 🌟
 
-## Features ✨
+1. **CEFR Seviyesi Tahmini:** Kullanıcıların girdiği İngilizce cümleye göre dil seviyesi (A1, A2, B1, B2, C1, C2) tahmin edilir.
+2. **Zaman (Tense) Tahmini:** Cümlede kullanılan zaman dilimi (Present, Past, Future) tahmin edilir.
+3. **Web Arayüzü:** PyWebIO kullanılarak geliştirilmiş bir web arayüzü üzerinden kullanıcılar, uygulamaya cümle girer ve sonuçları görsel olarak alırlar.
+4. **Hızlı ve Kullanıcı Dostu:** Sonuçlar, şık bir görsel ile birlikte kullanıcıya sunulur.
 
-### CEFR Classifier
-- Predicts language proficiency level (A1 to C2)
-- Supports multiple ML models (SVM, Random Forest, Neural Network)
-- Includes probability distribution across levels
-- Visualizations (level distribution, word clouds)
+---
 
-### Tense Classifier
-- Identifies verb tenses (Present, Past, Future)
-- Uses Bidirectional LSTM model
-- Combines model predictions with grammatical indicators
-- Confidence scores for each tense
+## Kullanılan Teknolojiler 💻
 
-### Interfaces
-- Desktop GUI (Tkinter)
-- Web Interface (PyWebIO)
-- Command Line Interface
+- **Python**
+- **PyWebIO**: Web uygulaması için.
+- **TensorFlow**: Zaman sınıflandırma (Tense) için derin öğrenme modeli.
+- **Scikit-learn**: CEFR seviyesi tahmini için.
+- **Keras**: LSTM tabanlı zaman sınıflandırma modeli için.
+- **Joblib**: Modelleri ve vektörizer dosyalarını yüklemek için.
+- **Pickle**: Tokenizer dosyasını yüklemek için.
+- **HTML & CSS**: Web sayfası tasarımı için.
 
-## Installation 🛠️
+---
 
-1. Clone the repository:
+## Uygulamanın Çalıştırılması 🚀
+
+### 1. Gereksinimler
+
+- Python 3.x yüklü olmalıdır.
+- Aşağıdaki komutla gerekli kütüphaneleri yükleyebilirsiniz:
+
 ```bash
-git clone https://github.com/yourusername/English-Sentence-Analyzer.git
-cd English-Sentence-Analyzer
+pip install -r requirements.txt
