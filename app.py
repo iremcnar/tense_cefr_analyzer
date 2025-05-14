@@ -15,7 +15,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 # Not: PyWebIO ile çalıştığı için tarayıcıda "güvenli değil" uyarısı görünebilir devam et butonuna tıklayarak uygulamayı açabilirsiniz.
 # (Not: Bu bağlantı terminalde çalıştırıldığında bir kez gösterildiği için buraya not olarak ekledim.)
 # Siteye girmek istemezseniz sitenin bazı görüntülerini yandaki images kısmında bulabilirsiniz.
-
+rgr
 # --- CEFR MODEL YÜKLE ---
 def load_cefr_model():
     model = joblib.load('CEFR_model/my_cefr_model.pkl') #DİKKAT :sitenin çalışması için kendı model yolunuza göre değiştirmelisiniz
