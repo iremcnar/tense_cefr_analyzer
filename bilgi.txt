@@ -1,0 +1,48 @@
+-------GENEL INFO--------
+Projede CEFR seviyesi tahmini için metinleri önce temizleyip ön işledim,
+ardından TF-IDF (Term Frequency-Inverse Document Frequency) yöntemi ile metinleri sayısal özelliklere dönüştürdüm.
+Bu özelliklerle bir makine öğrenmesi modeli (örneğin, Logistic Regression, Random Forest veya başka bir sınıflandırıcı) eğittim.
+Tense tahmini için ise cümleleri temizledikten sonra tokenization (kelime dizilerine çevirme) işlemi yaptımve dizileri sabit uzunlukta olacak şekilde pad ettim.
+Daha sonra Keras ile LSTM (Long Short-Term Memory) tabanlı bir derin öğrenme modeli kurup eğittim.
+Modelin eğitiminde TensorFlow, Keras, scikit-learn, numpy ve pandas gibi popüler Python kütüphanelerini kullandım.
+Modelleri eğitim sonrası kaydederek daha sonra PyWebIO ile interaktif bir web uygulaması oluşturup kullanıcıların tahminleri canlı olarak test etmesini sağladım.
+
+------MODEL----------
+CEFR modelini makine öğrenmesi tabanlı olarak sıfırdan eğittim. Modeli ve yardımcı objeleri (TF-IDF, label encoder) pickle (.pkl) formatında kaydettim.
+Tense modelini ise LSTM tabanlı derin öğrenme yöntemiyle sıfırdan eğittim ve tüm modeli .h5 formatında kaydettim.
+
+
+-------WEB----------
+# Uygulamayı çalıştırmak için terminalde aşağıdaki komutu kullanın:
+# python app.py
+# Uygulama çalıştıktan sonra tarayıcınızda aşağıdaki bağlantıyı açabilirsiniz:
+# http://192.168.2.212:8086/
+# Not: PyWebIO ile çalıştığı için tarayıcıda "güvenli değil" uyarısı görünebilir devam et butonuna tıklayarak uygulamayı açabilirsiniz.
+# (Not: Bu bağlantı terminalde çalıştırıldığında bir kez gösterildiği için buraya not olarak ekledim.)
+# Siteye girmek istemezseniz sitenin bazı görüntülerini yandaki images kısmında bulabilirsiniz.
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+| Kütüphane / Araç                                                        | CEFR Seviye Tahmini  | Tens (Zaman) Sınıflandırması   |
+| ----------------------------------------------------------------------- | -------------------  | ----------------------------   |
+| pandas                                                                  | ✅                   | ✅                            |
+| numpy                                                                   | ✅                   | ✅                            |
+| string                                                                  | ✅                   | ✅                            |
+| re (regex)                                                              | ✅                   | ✅                            |
+| nltk (stopwords, lemmatizer)                                            | ✅                   | ✅                            |
+| sklearn.model\_selection.train\_test\_split                             | ✅                   | ✅                            |
+| sklearn.feature\_extraction.text.TfidfVectorizer                        | ✅                   | ❌ (genellikle kullanılmaz)   |
+| sklearn.preprocessing.LabelEncoder                                      | ✅                   | ✅                            |
+| sklearn.svm.SVC                                                         | ✅                   | ❌ (tensorflow ağırlıklı)     |
+| sklearn.ensemble.RandomForestClassifier                                 | ✅                   | ❌                            |
+| sklearn.naive\_bayes.MultinomialNB                                      | ✅                   | ❌                            |
+| sklearn.neural\_network.MLPClassifier                                   | ✅                   | ❌                            |
+| sklearn.metrics.classification\_report, accuracy\_score                 | ✅                   | ✅                            |
+| tensorflow\.keras.preprocessing.text.Tokenizer                          | ✅                   | ✅                            |
+| tensorflow\.keras.preprocessing.sequence.pad\_sequences                 | ✅                   | ✅                            |
+| tensorflow\.keras.models.Sequential / Model                             | ✅                   | ✅                            |
+| tensorflow\.keras.layers.Embedding, LSTM, Bidirectional, Dense, Dropout | ✅                   | ✅                            |
+| tensorflow\.keras.callbacks.EarlyStopping, ModelCheckpoint              | ✅                   | ✅                            |
+| matplotlib.pyplot, seaborn                                              | ✅                   | ✅                            |
+| joblib                                                                  | ✅                   | ✅                            |
+| tkinter                                                                 | ✅ (opsiyonel)       | ✅ (opsiyonel)                |
