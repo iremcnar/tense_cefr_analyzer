@@ -1,7 +1,7 @@
 # Uygulamayı çalıştırmak için terminalde aşağıdaki komutu kullanın:
 # python app.py
 # Uygulama çalıştıktan sonra tarayıcınızda aşağıdaki bağlantıyı açabilirsiniz:
-# http://192.168.2.212:8086/
+# http://172.20.10.3:8086/
 # Not: PyWebIO ile çalıştığı için tarayıcıda "güvenli değil" uyarısı görünebilir devam et butonuna tıklayarak uygulamayı açabilirsiniz.
 # (Not: Bu bağlantı terminalde çalıştırıldığında bir kez gösterildiği için buraya not olarak ekledim.)
 # Siteye girmek istemezseniz sitenin bazı görüntülerini yandaki images kısmında bulabilirsiniz.
