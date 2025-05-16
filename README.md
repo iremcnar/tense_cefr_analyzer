@@ -1,4 +1,4 @@
-# İngilizce Cümle Analiz Sistemi 📚🧠
+# İngilizce Analiz Sistemi 📚🧠
 
 Bu proje, kullanıcıların İngilizce cümleleri girerek CEFR (Common European Framework of Reference) seviyesi ve zaman dilimi (tense) tahminleri yapabilmesini sağlar. Ayrıca, çoktan seçmeli İngilizce sorulara cevap veren bir Quiz Sistemi içerir. Tüm bunlar, Python tabanlı ve PyWebIO ile web arayüzü üzerinden çalışan interaktif bir uygulamada sunulmaktadır.
 
