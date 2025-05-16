@@ -3,6 +3,9 @@
 Bu proje, kullanıcıların İngilizce cümleleri girerek CEFR (Common European Framework of Reference) seviyesi ve zaman dilimi (tense) tahminleri yapabilmesini sağlar. Ayrıca, çoktan seçmeli İngilizce sorulara cevap veren bir Quiz Sistemi içerir. Tüm bunlar, Python tabanlı ve PyWebIO ile web arayüzü üzerinden çalışan interaktif bir uygulamada sunulmaktadır.
 
 ---
+## Quiz Model Dosyası
+Model dosyamız büyük olduğu için GitHub'a eklenmemiştir. Aşağıdaki linkten indirebilirsiniz:
+[Modeli İndir](https://drive.google.com/file/d/1BYZ1QZatTGixWXNMrfijB9YHJY2ObbMP/view?usp=sharing)
 
 ## Özellikler 🌟
 
