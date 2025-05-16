@@ -6,6 +6,7 @@ Bu proje, kullanıcıların İngilizce cümleleri girerek CEFR (Common European 
 ## Quiz Model Dosyası
 "tf_model.h5" model dosyam büyük olduğu için GitHub'a eklenmemiştir. Yandaki linkten indirebilirsiniz:
 [Modeli İndir](https://drive.google.com/file/d/1BYZ1QZatTGixWXNMrfijB9YHJY2ObbMP/view?usp=sharing)
+Projeyi çalıştırabilmek için modeli "english_exam_model" klasorüne ekleyin.
 
 ## Özellikler 🌟
 
