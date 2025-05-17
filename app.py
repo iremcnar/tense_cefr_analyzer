@@ -122,8 +122,9 @@ class EnglishQuizWeb:
 
         data_path = os.path.abspath(r"C:\Users\PC\OneDrive\Masaüstü\tense_cefr -analyzerr\english_exam_model\clean_questions.csv")
         self.questions = pd.read_csv(data_path)
-        required_cols = ['question', 'choice_1', 'choice_2', 'choice_3', 'choice_4', 'answer']
-        self.questions = self.questions.dropna(subset=required_cols)
+
+        self.questions = self.questions.dropna(subset=['question'])
+        # Sadece gerekli sütunları tut
 
     def get_random_question(self):
         row = self.questions.sample(1).iloc[0]
